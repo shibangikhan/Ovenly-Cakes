@@ -16,11 +16,11 @@ load_dotenv(BASE_DIR / ".env")
 # SECURITY
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-default-key')
 DEBUG = os.environ.get('DEBUG', 'True').lower() in ('1', 'true', 'yes')
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost 127.0.0.1').split()
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 CSRF_TRUSTED_ORIGINS = os.environ.get(
     'CSRF_TRUSTED_ORIGINS',
-    'http://localhost https://localhost'
-).split()
+    'http://localhost,http://127.0.0.1'
+).split(',')
 
 # APPLICATIONS
 INSTALLED_APPS = [
