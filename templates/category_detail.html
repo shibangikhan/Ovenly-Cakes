@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Category products from Sweet Haven Cakes.">
+  <title>{{ category.name }} | Sweet Haven Cakes</title>
+  <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="#home" class="navbar-logo">
+        <div class="navbar-logo-icon">S </div>
+        <span>Sweet Haven</span>
+      </a>
+      <div class="navbar-menu">
+        <a href="{% url 'index' %}#home">Home</a>
+        <a href="{% url 'index' %}#about">About</a>
+        <a href="{% url 'index' %}#categories">Categories</a>
+        <a href="{% url 'index' %}#shop">Shop</a>
+        <a href="{% url 'index' %}#testimonials">Testimonials</a>
+        <a href="{% url 'index' %}#contact">Contact</a>
+      </div>
+      <div class="navbar-right">
+        <button type="button" class="navbar-cart-btn" aria-label="Shopping cart">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 6.293a1 1 0 00.117 1.097A1 1 0 006 21h12a1 1 0 00.883-.5 1 1 0 00.117-1.097L17 13M17 13l2-8m-8 0h2" />
+          </svg>
+        </button>
+        <div class="navbar-auth">
+          {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="logout-link">Logout</a>
+          {% else %}
+            <a href="{% url 'login' %}" class="login-link">Sign In</a>
+            <a href="{% url 'register' %}" class="signup-link">Sign Up</a>
+          {% endif %}
+        </div>
+        <button type="button" class="navbar-toggle" aria-label="Toggle menu" aria-controls="mobile-menu" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="navbar-mobile">
+      <a href="{% url 'index' %}#home">Home</a>
+      <a href="{% url 'index' %}#about">About</a>
+      <a href="{% url 'index' %}#categories">Categories</a>
+      <a href="{% url 'index' %}#shop">Shop</a>
+      <a href="{% url 'index' %}#testimonials">Testimonials</a>
+      <a href="{% url 'index' %}#contact">Contact</a>
+      <div class="navbar-mobile-auth">
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'logout' %}" class="logout-link">Logout</a>
+        {% else %}
+          <a href="{% url 'login' %}" class="login-link">Sign In</a>
+          <a href="{% url 'register' %}" class="signup-link">Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <!-- CATEGORY DETAIL -->
+  <section id="shop" class="shop">
+    <div class="shop-container">
+      <div class="shop-header">
+        <div class="shop-badge">
+          <span>{{ category.name }}</span>
+        </div>
+        <h2>{{ category.name }}</h2>
+        <p>{{ category.description }}</p>
+      </div>
+
+      <div class="products-grid">
+        {% for item in items %}
+          <div class="product-card">
+            <div class="product-image">
+              {% if item.image %}
+                <img src="{{ item.image.url }}" alt="{{ item.name }}">
+              {% else %}
+                <img src="{% static 'img/default-product.jpg' %}" alt="{{ item.name }}">
+              {% endif %}
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">{{ item.name }}</h3>
+              <p class="product-desc">{{ item.description }}</p>
+              <div class="product-footer">
+                <span class="product-price">₹{{ item.price }}</span>
+                <button class="btn btn-primary" data-add-to-cart data-product-type="item" data-product-id="{{ item.id }}" data-product-name="{{ item.name }}" data-product-price="{{ item.price }}" data-product-emoji="">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        {% empty %}
+          <div class="product-card">
+            <div class="product-image">
+              <img src="{% static 'img/default-product.jpg' %}" alt="No products">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">No items found</h3>
+              <p class="product-desc">This category has no products yet. Please check back later.</p>
+              <div class="product-footer">
+                <span class="product-price">₹0</span>
+                <button class="btn btn-primary" disabled>Unavailable</button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <div id="cart-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Shopping Cart</h2>
+        <button class="modal-close" aria-label="Close cart">✕</button>
+      </div>
+      <div class="cart-items"></div>
+      <div class="cart-summary"></div>
+      <div id="checkout-phase" class="checkout-phase" style="display: none; margin-top: 1rem;">
+        <h3>Shipping Address</h3>
+        <div class="checkout-grid">
+          <label>
+            Address Line 1
+            <input id="address-line1" type="text" class="form-input" placeholder="Street address" required>
+          </label>
+          <label>
+            Address Line 2
+            <input id="address-line2" type="text" class="form-input" placeholder="Apartment, suite, etc. (optional)">
+          </label>
+          <label>
+            City
+            <input id="address-city" type="text" class="form-input" placeholder="City" required>
+          </label>
+          <label>
+            State / Region
+            <input id="address-state" type="text" class="form-input" placeholder="State or region" required>
+          </label>
+          <label>
+            Postal Code
+            <input id="address-postal-code" type="text" class="form-input" placeholder="Postal code" required>
+          </label>
+          <label>
+            Country
+            <input id="address-country" type="text" class="form-input" placeholder="Country" required>
+          </label>
+        </div>
+        <h3>Payment Method</h3>
+        <div class="checkout-payment">
+          <label>
+            <input id="payment-method" name="payment_method" type="radio" value="cash" checked>
+            Cash on Delivery
+          </label>
+          <label>
+            <input name="payment_method" type="radio" value="online">
+            Online Payment
+          </label>
+        </div>
+        <label>
+          Delivery Notes
+          <textarea id="delivery-notes" class="form-textarea" placeholder="Delivery instructions (optional)"></textarea>
+        </label>
+      </div>
+      <button id="checkout-button" type="button" class="btn btn-primary" style="width: 100%;">Proceed to Checkout</button>
+      <button id="place-order-button" type="button" class="btn btn-secondary" style="width: 100%; display: none; margin-top: 0.75rem;">Place Order</button>
+    </div>
+  </div>
+  <script>
+    window.USER_AUTHENTICATED = {{ request.user.is_authenticated|yesno:"true,false" }};
+    window.LOGIN_URL = "{% url 'login' %}";
+    window.API_CART_URL = "{% url 'api_cart_view' %}";
+    window.API_ADD_TO_CART_URL = "{% url 'api_add_to_cart' %}";
+    window.API_CART_UPDATE_URL = "{% url 'api_update_cart_item' %}";
+    window.API_CART_REMOVE_URL = "{% url 'api_remove_cart_item' %}";
+    window.API_CHECKOUT_URL = "{% url 'api_checkout' %}";
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0/min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+  <script src="{% static 'js/sweethaven-main.js' %}" defer></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Ovenly Cakes</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1>Create Account</h1>
+        <p>Register to order artisan cakes with confidence.</p>
+      </div>
+      
+      {% if messages %}
+      <div class="auth-messages">
+        {% for message in messages %}
+          <div class="message {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if form.errors %}
+      <div class="auth-errors">
+        {{ form.errors.as_ul }}
+      </div>
+      {% endif %}
+      
+      <form method="post" class="auth-form" id="register-form">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="text" id="first_name" name="first_name" class="form-input" placeholder="First name" required>
+          <span class="form-error" id="first_name-error"></span>
+        </div>
+        
+        <div class="form-group">
+          <input type="text" id="last_name" name="last_name" class="form-input" placeholder="Last name" required>
+          <span class="form-error" id="last_name-error"></span>
+        </div>
+        
+        <div class="form-group">
+          <input type="text" id="mobile" name="mobile" class="form-input" placeholder="Mobile" required>
+          <span class="form-error" id="mobile-error"></span>
+        </div>
+        
+        <div class="form-group">
+          <input type="email" id="email" name="email" class="form-input" placeholder="Email address" required>
+          <span class="form-error" id="email-error"></span>
+        </div>
+        
+        <div class="form-group">
+          <input type="password" id="password1" name="password1" class="form-input" placeholder="Password" required>
+          <span class="form-error" id="password1-error"></span>
+        </div>
+        
+        <div class="form-group">
+          <input type="password" id="password2" name="password2" class="form-input" placeholder="Confirm password" required>
+          <span class="form-error" id="password2-error"></span>
+        </div>
+        
+        <div class="form-checkbox">
+          <input type="checkbox" id="terms" name="terms" required>
+          <label for="terms">I agree to the <a href="#" style="color: var(--primary);">terms and conditions</a></label>
+        </div>
+        
+        <button type="submit" class="auth-submit">Create Account</button>
+      </form>
+      
+      <div class="auth-footer">
+        Already have an account? <a href="{% url 'login' %}">Sign in</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,468 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Delicious, handcrafted cakes for every occasion. Custom designs, premium ingredients, fresh baked daily.">
+  <title>Ovenly Cakes - Artisan Cake Shop</title>
+<link rel="stylesheet" href="{% static 'css/variables.css' %}">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="#home" class="navbar-logo">
+        <div class="navbar-logo-icon">O </div>
+        <span>Ovenly Cakes</span>
+      </a>
+      
+      <div class="navbar-menu">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#categories">Categories</a>
+        <a href="#shop">Shop</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+      </div>
+      
+      <div class="navbar-right">
+        <button type="button" class="navbar-cart-btn" aria-label="Shopping cart">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 6.293a1 1 0 00.117 1.097A1 1 0 006 21h12a1 1 0 00.883-.5 1 1 0 00.117-1.097L17 13M17 13l2-8m-8 0h2" />
+          </svg>
+        </button>
+        
+        <div class="navbar-auth">
+          <a href="{% url 'login' %}" class="login-link">Sign In</a>
+          <a href="{% url 'register' %}" class="signup-link">Sign Up</a>
+        </div>
+        
+        <button type="button" class="navbar-toggle" aria-label="Toggle menu" aria-controls="mobile-menu" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <div id="mobile-menu" class="navbar-mobile">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#categories">Categories</a>
+      <a href="#shop">Shop</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+      <div class="navbar-mobile-auth">
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'logout' %}" class="logout-link">Logout</a>
+        {% else %}
+          <a href="{% url 'login' %}" class="login-link">Sign In</a>
+          <a href="{% url 'register' %}" class="signup-link">Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section id="home" class="hero">
+    <div class="hero-container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span>LUXURY PATISSERIE</span>
+          </div>
+          <h1>Artisan Cakes Crafted with Passion</h1>
+          <p>Experience the pinnacle of baking excellence. Each cake is a masterpiece, handcrafted with premium ingredients and refined techniques for your most cherished celebrations.</p>
+          <div class="hero-buttons">
+            <a href="#shop" class="btn btn-primary btn-lg">
+              Explore Collection
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+              </svg>
+            </a>
+            <a href="#contact" class="btn btn-outline btn-lg">Request Consultation</a>
+          </div>
+          <div class="hero-stats">
+            <div><span>500+</span> Happy Customers</div>
+            <div><span>15+</span> Years Experience</div>
+          </div>
+        </div>
+        
+        <div class="hero-image">
+          <img src="{% static 'img/hero.png' %}" alt="Premium Artisan Cake">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section id="about" class="about">
+    <div class="about-container">
+      <div class="about-grid">
+        <div class="about-image">
+          <img src="{% static 'img/about.png' %}" alt="Artisan Bakery - Ovenly Cakes">
+        </div>
+        
+        <div class="about-content">
+          <div>
+            <h2>About Ovenly Cakes</h2>
+          </div>
+          <p>For over a decade, Ovenly Cakes has been redefining cake craftsmanship. We combine time-honored techniques with premium global ingredients to create cakes that aren&apos;t just beautiful—they&apos;re extraordinary.</p>
+          
+          <div class="about-features">
+            <div class="about-feature">
+              <div class="about-feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="7" width="16" height="10" rx="2" />
+                  <path d="M4 11h16" />
+                  <path d="M8 7v-2" />
+                  <path d="M16 7v-2" />
+                </svg>
+              </div>
+              <div>
+                <h3>Premium Sourcing</h3>
+                <p>Butter from Normandy, vanilla from Madagascar, chocolate from Belgium</p>
+              </div>
+            </div>
+            <div class="about-feature">
+              <div class="about-feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 14a6 6 0 0 1 12 0 5 5 0 0 1-4 4.9V21H10v-2.1A5 5 0 0 1 6 14Z" />
+                  <path d="M9 9h.01" />
+                  <path d="M15 9h.01" />
+                  <path d="M12 12h.01" />
+                </svg>
+              </div>
+              <div>
+                <h3>Artistic Vision</h3>
+                <p>Each cake is a bespoke creation designed to exceed expectations</p>
+              </div>
+            </div>
+            <div class="about-feature">
+              <div class="about-feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 3h10v4a3 3 0 0 1-3 3h-4a3 3 0 0 1-3-3V3Z" />
+                  <path d="M6 7H4" />
+                  <path d="M18 7h2" />
+                  <path d="M8 14h8v5H8Z" />
+                  <path d="M10 20h4" />
+                </svg>
+              </div>
+              <div>
+                <h3>Award Winning</h3>
+                <p>Recognized by industry leaders for innovation and excellence</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES SECTION -->
+  <section id="categories" class="categories">
+    <div class="categories-container">
+      <div class="categories-header">
+        <div class="categories-badge">
+          <span>CURATED CATEGORIES</span>
+        </div>
+        <h2>Explore Our Collections</h2>
+        <p>Each category showcases our expertise in creating memorable cakes for every occasion</p>
+      </div>
+      
+    <div class="categories-grid">
+  {% for category in categories %}
+    <a href="{% url 'category_detail' category.id %}" class="category-card-link">
+      <div class="category-card">
+        {% if category.image %}
+          <img src="{{ category.image.url }}" alt="{{ category.name }}">
+        {% else %}
+          <img src="{% static 'public/category-milestone.jpg' %}" alt="{{ category.name }}">
+        {% endif %}
+
+        <div class="category-overlay">
+          <h3>{{ category.name }}</h3>
+          <p>{{ category.description }}</p>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </div>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+
+  <!-- SHOP SECTION -->
+  <section id="shop" class="shop">
+    <div class="shop-container">
+      <div class="shop-header">
+        <div class="shop-badge">
+          <span>CURATED SELECTION</span>
+        </div>
+        <h2>Premium Cake Collection</h2>
+        <p>Each cake is individually crafted with premium ingredients and finished with artistic precision</p>
+      </div>
+      
+      <div class="products-grid">
+        {% for product in products %}
+          <div class="product-card">
+            <div class="product-image">
+              {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+              {% else %}
+                <img src="{% static 'img/default-product.jpg' %}" alt="{{ product.name }}">
+              {% endif %}
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">{{ product.name }}</h3>
+              <p class="product-desc">{{ product.description }}</p>
+              <div class="product-footer">
+                <span class="product-price">₹{{ product.price }}</span>
+                <button class="btn btn-primary" data-add-to-cart data-product-type="product" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}" data-product-price="{{ product.price }}" data-product-emoji="">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        {% empty %}
+          <div class="product-card">
+            <div class="product-image">
+              <img src="{% static 'img/default-product.jpg' %}" alt="No product">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">No products available</h3>
+              <p class="product-desc">Please add products from the admin panel.</p>
+              <div class="product-footer">
+                <span class="product-price">₹0</span>
+                <button class="btn btn-primary" disabled>
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section id="testimonials" class="testimonials">
+    <div class="testimonials-container">
+      <div class="testimonials-header">
+        <h2>What Our Clients Say</h2>
+        <p>Trusted by premium event planners and luxury venues worldwide</p>
+      </div>
+      
+      <div class="testimonials-grid">
+        {% for testimonial in testimonials %}
+          <div class="testimonial-card">
+            {% if testimonial.image %}
+              <div class="testimonial-photo-wrapper">
+                <img class="testimonial-photo" src="{{ testimonial.image.url }}" alt="{{ testimonial.author }}">
+              </div>
+            {% endif %}
+            <div class="testimonial-stars">
+              {% for _ in testimonial.star_range %}
+                <span class="testimonial-star">★</span>
+              {% endfor %}
+            </div>
+            <p class="testimonial-quote">"{{ testimonial.quote }}"</p>
+            <p class="testimonial-author">{{ testimonial.author }}</p>
+            <p class="testimonial-role">{{ testimonial.occupation }}</p>
+          </div>
+        {% empty %}
+          <p class="testimonial-quote">No testimonials are available yet. Please add them from the admin panel.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="contact">
+    <div class="contact-container">
+      <div class="contact-header">
+        <h2>Get in Touch</h2>
+        <p>Have a custom cake dream? We'd love to hear from you</p>
+      </div>
+      
+      <div class="contact-grid">
+        <form class="contact-form" id="contact-form">
+          <div class="form-group">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" id="name" name="name" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" name="email" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input type="tel" id="phone" name="phone" class="form-input">
+          </div>
+          <div class="form-group">
+            <label for="message" class="form-label">Message</label>
+            <textarea id="message" name="message" class="form-textarea" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+        </form>
+        
+        <div class="contact-info">
+          <div class="contact-info-item">
+            <h3 class="contact-info-title">📍 Location</h3>
+            <p class="contact-info-content">123 Artisan Lane<br>Baking District<br>NY 10001, USA</p>
+          </div>
+          
+          <div class="contact-info-item">
+            <h3 class="contact-info-title">☎️ Phone</h3>
+            <p class="contact-info-content"><a href="tel:+12125551234">+1 (212) 555-1234</a></p>
+          </div>
+          
+          <div class="contact-info-item">
+            <h3 class="contact-info-title">✉️ Email</h3>
+            <p class="contact-info-content"><a href="mailto:hello@sweethaven.com">hello@sweethaven.com</a></p>
+          </div>
+          
+          <div class="contact-info-item">
+            <h3 class="contact-info-title">🕐 Business Hours</h3>
+            <p class="contact-info-content">Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: Closed</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>Ovenly Cakes</h3>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Collections</h3>
+          <ul>
+            <li><a href="#shop">All Cakes</a></li>
+            <li><a href="#categories">Categories</a></li>
+            <li><a href="#">Custom Orders</a></li>
+            <li><a href="#">Seasonal</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Customer Service</h3>
+          <ul>
+            <li><a href="#">Order Status</a></li>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Newsletter</h3>
+          <div class="footer-newsletter">
+            <input type="email" placeholder="Your email" aria-label="Email for newsletter">
+            <button type="submit">Subscribe</button>
+          </div>
+          <p style="font-size: var(--font-size-xs); color: rgba(255, 255, 255, 0.6); margin-top: 0.5rem;">Be the first to know about new collections</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2024 Ovenly Cakes. All rights reserved. Crafted with 💕 by artisans.</p>
+    </div>
+  </footer>
+
+  <!-- CART MODAL -->
+  <div id="cart-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Shopping Cart</h2>
+        <button class="modal-close" aria-label="Close cart">✕</button>
+      </div>
+      
+      <div class="cart-items"></div>
+      
+      <div class="cart-summary"></div>
+      
+      <div id="checkout-phase" class="checkout-phase" style="display: none; margin-top: 1rem;">
+        <h3>Shipping Address</h3>
+        <div class="checkout-grid">
+          <label>
+            Address Line 1
+            <input id="address-line1" type="text" class="form-input" placeholder="Street address" required>
+          </label>
+          <label>
+            Address Line 2
+            <input id="address-line2" type="text" class="form-input" placeholder="Apartment, suite, etc. (optional)">
+          </label>
+          <label>
+            City
+            <input id="address-city" type="text" class="form-input" placeholder="City" required>
+          </label>
+          <label>
+            State / Region
+            <input id="address-state" type="text" class="form-input" placeholder="State or region" required>
+          </label>
+          <label>
+            Postal Code
+            <input id="address-postal-code" type="text" class="form-input" placeholder="Postal code" required>
+          </label>
+          <label>
+            Country
+            <input id="address-country" type="text" class="form-input" placeholder="Country" required>
+          </label>
+        </div>
+
+        <h3>Payment Method</h3>
+        <div class="checkout-payment">
+          <label>
+            <input id="payment-method" name="payment_method" type="radio" value="cash" checked>
+            Cash on Delivery
+          </label>
+          <label>
+            <input name="payment_method" type="radio" value="online">
+            Online Payment
+          </label>
+        </div>
+
+        <label>
+          Delivery Notes
+          <textarea id="delivery-notes" class="form-textarea" placeholder="Delivery instructions (optional)"></textarea>
+        </label>
+      </div>
+      
+      <button id="checkout-button" type="button" class="btn btn-primary" style="width: 100%;">Proceed to Checkout</button>
+      <button id="place-order-button" type="button" class="btn btn-secondary" style="width: 100%; display: none; margin-top: 0.75rem;">Place Order</button>
+    </div>
+  </div>
+<script>
+    window.USER_AUTHENTICATED = {{ request.user.is_authenticated|yesno:"true,false" }};
+    window.LOGIN_URL = "{% url 'login' %}";
+    window.API_CART_URL = "{% url 'api_cart_view' %}";
+    window.API_ADD_TO_CART_URL = "{% url 'api_add_to_cart' %}";
+    window.API_CART_UPDATE_URL = "{% url 'api_update_cart_item' %}";
+    window.API_CART_REMOVE_URL = "{% url 'api_remove_cart_item' %}";
+    window.API_CHECKOUT_URL = "{% url 'api_checkout' %}";
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+
+<script src="{% static 'js/sweethaven-main.js' %}" defer></script>
+
+</body>
+</html>
