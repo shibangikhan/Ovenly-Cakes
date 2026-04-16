@@ -973,6 +973,7 @@ a {
   padding: 1.5rem;
 }
 
+
 .product-name {
   font-size: var(--font-size-xl);
   font-weight: 700;
@@ -1051,6 +1052,20 @@ a {
   border-radius: var(--radius-xl);
   padding: 2rem;
   transition: all var(--transition-normal);
+}
+
+.testimonial-photo-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.testimonial-photo {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.8);
 }
 
 .testimonial-card:hover {
@@ -1683,3 +1698,4 @@ a {
     gap: 1rem;
   }
 }
+  
