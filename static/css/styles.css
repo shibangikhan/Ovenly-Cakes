@@ -944,18 +944,29 @@ a {
 }
 
 .product-image {
-  height: 18rem;
+  height: 14rem;
   background: linear-gradient(135deg, var(--muted), rgba(224, 224, 224, 0.3));
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   font-size: 5rem;
-  transition: transform var(--transition-normal);
 }
 
-.product-card:hover .product-image {
-  transform: scale(1.1);
+.product-image img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+}
+
+@media (max-width: 768px) {
+  .product-image {
+    height: 11rem;
+  }
 }
 
 .product-info {
@@ -1040,20 +1051,6 @@ a {
   border-radius: var(--radius-xl);
   padding: 2rem;
   transition: all var(--transition-normal);
-}
-
-.testimonial-photo-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1.25rem;
-}
-
-.testimonial-photo {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.8);
 }
 
 .testimonial-card:hover {
@@ -1686,4 +1683,3 @@ a {
     gap: 1rem;
   }
 }
-  
